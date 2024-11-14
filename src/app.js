@@ -15,4 +15,13 @@ app.use(express.static("public")) // for controlling mage in public folder
 app.use(cookieParser())
 
 
+
+//import routes
+import userRouter from './routes/user.route.js';
+
+// root declaration
+
+app.use("api/v1/users" , userRouter )
+
+
 export {app} ;
