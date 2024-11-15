@@ -2,7 +2,7 @@ import asyncHandler from "../utils/asyncHandler.js"
 import {ApiError} from "../utils/ApiError.js"
 import {User} from "../models/user.module.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.js"
-import {ApiResponse} from "../utils/ApiResponse.js"
+import {} from '../utils/ApiResponse.js'
 
 const registerUser = asyncHandler(async (req , res) => {
     
@@ -16,7 +16,7 @@ const registerUser = asyncHandler(async (req , res) => {
         
     }
     
-   const existedUser = User.findOne({
+   const existedUser = await User.findOne({
         $or : [{ username } , { email } ]
     })
 
@@ -56,9 +56,9 @@ const registerUser = asyncHandler(async (req , res) => {
         throw new ApiError(500, "Some Thing Went Wrong and Failed to create user") ;
     }
 
-    return res.status(201).json({
-        new ApiResponse(200  createdUser , "User Created Succesfully")
-    })
+    return res.status(201).json(
+        new ApiResponse(200, createdUser, "User registered Successfully")
+    )
     })
 
     
