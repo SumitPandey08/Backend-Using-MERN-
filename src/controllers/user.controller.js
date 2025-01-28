@@ -1,7 +1,7 @@
 import asyncHandler  from "../utils/asyncHandler.js";
 import {ApiError} from "../utils/ApiError.js"
 import { User } from '../models/user.module.js'
-import {uploadOnCloudinary} from "../utils/cloudinary.js"
+import {uploadOnCloudinary} from  '../utils/cloudinary.js'
 import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken"
 import mongoose from "mongoose";
@@ -12,7 +12,7 @@ const generateAccessAndRefereshTokens = async(userId) =>{
         const user = await User.findById(userId)
         const accessToken = user.generateAccessToken()
         const refreshToken = user.generateRefreshToken()
-
+ 
         user.refreshToken = refreshToken
         await user.save({ validateBeforeSave: false })
 
@@ -107,7 +107,7 @@ const loginUser = asyncHandler( async (req , res) => {
     }
 
     const  user = await User.findOne({
-        $or: [{email} , {email}] 
+        $or: [{email} , {username}] 
     })
 
     if(!user) {

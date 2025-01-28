@@ -1,1 +1,1 @@
-export const DB_NAME = "MONGODB" 
+export const DB_NAME = "Social-Media"
